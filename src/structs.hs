@@ -5,6 +5,8 @@
 
 --packageTree: a basic rose tree made to represent a package at the node
 --and dependent packages in the leaves (represented as a list)
+import qualified Data.Map.Lazy as BinMap
+
 data PackageTree a = Node a [PackageTree a]
   deriving(Show)
 
@@ -26,5 +28,13 @@ toListWith f (Node val vals) = (f val) : (vals >>= toListWith f)
 --toList: Converts a tree to a list
 toList :: PackageTree a -> [a]
 toList tr = toListWith id tr
+
+type BinaryPackageTree a = BinMap.Map String a
+
+insertIntoBinTree :: String -> a -> BinaryPackageTree a -> BinaryPackageTree a
+insertIntoBinTree key val tree = BinMap.insert key val tree
+
+getFromTree :: String -> BinaryPackageTree a -> Maybe a
+getFromTree key tree = BinMap.lookup key tree
 
 a = Node 1 [Node 2 [], Node 3 [], Node 4 [Node 5 [Node 7 []], Node 6[]]]
