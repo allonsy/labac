@@ -37,4 +37,7 @@ insertIntoBinTree key val tree = BinMap.insert key val tree
 getFromTree :: String -> BinaryPackageTree a -> Maybe a
 getFromTree key tree = BinMap.lookup key tree
 
+emptyBinTree :: BinaryPackageTree a
+emptyBinTree = BinMap.empty
+
 a = Node 1 [Node 2 [], Node 3 [], Node 4 [Node 5 [Node 7 []], Node 6[]]]
